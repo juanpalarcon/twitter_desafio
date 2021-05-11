@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_08_145645) do
+ActiveRecord::Schema.define(version: 2021_05_11_232452) do
+
+  create_table "add_friends", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "friend_id"
+    t.index ["user_id"], name: "index_add_friends_on_user_id"
+  end
 
   create_table "likes", force: :cascade do |t|
     t.datetime "created_at", null: false

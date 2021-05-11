@@ -62,3 +62,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 gem 'font-awesome-rails', '~> 4.3'
+gem 'activeadmin'
