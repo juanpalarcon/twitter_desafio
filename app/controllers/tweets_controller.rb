@@ -3,16 +3,16 @@ class TweetsController < ApplicationController
   skip_before_action :verify_authenticity_token
   # GET /tweets or /tweets.json
   def index
-    @tweet = Tweet.new
-    @tweets = Tweet.all.order("created_at DESC").page(params[:page])
 
-  
+    @tweet = Tweet.new
+    @q = Tweet.ransack(params[:q])
+    @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)
   end
 
   
 
   def retweet
-    redirect_to root_path, alert: 'no es posible hacer retweet' and return if @tweet.user == current_user
+    redirect_to root_path, alert: 'no puedes hacer retweet' and return if @tweet.user == current_user
     retweeted = Tweet.new(content: @tweet.content)
     retweeted.user = current_user
     retweeted.rt_ref = @tweet.id

@@ -16,6 +16,8 @@
     <%=render 'shared/navbar'%>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+      <%    @q = Tweet.ransack(params[:q]) %>
+    <% @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)  %>
     <%= yield %>
   </body>
 </html>
