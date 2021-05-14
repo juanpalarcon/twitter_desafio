@@ -16,14 +16,19 @@
             <div class="card-header border border-primary">
               <img src=<%= tweet.user.get_user_photo %> width="60" height="60" class="rounded-circle mb-2" >
               <%= tweet.user.user_name %>
+              <% if signed_in?  %>
+<%# implementacion de boton Follow, falta aun ...  %>
+              <%= link_to 'Follow', user_friends_path(tweet), method: :post %> 
+              <% end %>
+            <div class='card-body'>
           
 <%# contenido %>
 
 
-            <div class='card-body'>
+          <div class='card-body'>
             <%#  el codigo es para que los hash se puedan buscar, no esta terminado  %>
               <%# <%= tweet.content     %>
-                            <div>  
+            <div>  
               <% content_tweet_array = tweet.content.split%>
               <% content_tweet_array.each do |element|%>
                 <% if element.start_with?("#") %>
@@ -59,19 +64,18 @@
               <%= tweet.likes.count %>
 
               <% if signed_in? %>
-                <% if like(tweet, current_user) %>
-                    <%= link_to tweet_like_path(tweet, like(tweet, current_user)), method: :delete do %>
-                   <span style="color: red;">
-                    <i class="fas fa-heart fa-1x"></i>
-                    </span>
-                <% end %>
+                  <% if like(tweet, current_user) %>
+                      <%= link_to tweet_like_path(tweet, like(tweet, current_user)), method: :delete do %>
+                    <span style="color: red;">
+                      <i class="fas fa-heart fa-1x"></i>
+                      </span>
+                  <% end %>
               <% else  %> 
                 <%= link_to tweet_likes_path(tweet), method: :post do %>
-                
                     <span style="color: black;">
                     <i class="fas fa-heart fa-1x"></i>
                     </span>
-                  <% end %>
+                <% end %>
                 <% end %>
               <% end %>
           <% end %>

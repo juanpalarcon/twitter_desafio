@@ -7,6 +7,14 @@ Rails.application.routes.draw do
       post 'retweet'
     end
   end
+
+  resources :users do
+    resources :friends
+  end
+  resources :tweets
+  resources :usuarios
+
+
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
