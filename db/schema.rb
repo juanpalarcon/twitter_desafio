@@ -38,12 +38,12 @@ ActiveRecord::Schema.define(version: 2021_05_14_005521) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "friend", force: :cascade do |t|
+  create_table "friends", force: :cascade do |t|
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "friend_id"
-    t.index ["user_id"], name: "index_friend_on_user_id"
+    t.index ["user_id"], name: "index_friends_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
