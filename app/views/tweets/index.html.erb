@@ -18,16 +18,19 @@
               <%= tweet.user.user_name %>
               <% if signed_in?  %>
 <%# implementacion de boton Follow, falta aun ...  %>
-              <%= link_to 'Follow', user_friends_path(tweet), method: :post %> 
+          <%= link_to(user_friends_path(tweet.id), method: :post)do%><i class="fas fa-user-plus fa-1x"></i><% end %>
+
+
+
               <% end %>
             <div class='card-body'>
-          
+
 <%# contenido %>
 
 
           <div class='card-body'>
             <%#  el codigo es para que los hash se puedan buscar, no esta terminado  %>
-              <%# <%= tweet.content     %>
+              <%# <%= tweet.content  %>
             <div>  
               <% content_tweet_array = tweet.content.split%>
               <% content_tweet_array.each do |element|%>
@@ -64,6 +67,7 @@
               <%= tweet.likes.count %>
 
               <% if signed_in? %>
+
                   <% if like(tweet, current_user) %>
                       <%= link_to tweet_like_path(tweet, like(tweet, current_user)), method: :delete do %>
                     <span style="color: red;">
@@ -81,7 +85,7 @@
           <% end %>
         </tr>
     
-            
+
 
 
 </div>  

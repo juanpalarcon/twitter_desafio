@@ -2,18 +2,16 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
     resources :tweets do 
-    resources :likes
-    member do
-      post 'retweet'
+      post :follower
+      resources :likes
+      member do
+        post 'retweet'
+      end
     end
-  end
 
   resources :users do
     resources :friends
   end
-  resources :tweets
-  resources :usuarios
-
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',

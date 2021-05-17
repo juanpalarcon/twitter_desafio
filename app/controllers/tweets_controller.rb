@@ -2,6 +2,14 @@ class TweetsController < ApplicationController
   before_action :set_tweet, only: %i[ show edit update destroy retweet]
   skip_before_action :verify_authenticity_token
   # GET /tweets or /tweets.json
+
+
+  def follower 
+    @tweet = Tweet.find(params[:tweet_id])
+    @friend = Friend.create(user_id: current_user.id, friend_id: params[:user_id])
+    Friend.create(user_id: current_user.id, friend_id: @tweet.user_id)
+    redirect_to root_path, notice: "Ahora sigues a #{@tweet.user.user_name}"
+  end
   def index
 
     @tweet = Tweet.new
@@ -38,6 +46,7 @@ class TweetsController < ApplicationController
   # GET /tweets/new
   def new
     @tweet = Tweet.new
+    @tweet = current_user.tweets.build
   end
 
   # GET /tweets/1/edit
@@ -47,7 +56,7 @@ class TweetsController < ApplicationController
   # POST /tweets or /tweets.json
   def create
     @tweet = Tweet.new(tweet_params.merge(user: current_user))
-
+    @tweet = current_user.tweets.build(tweet_params)
     respond_to do |format|
       if @tweet.save
         format.html { redirect_to root_path, notice: "Tweet was successfully created." }
