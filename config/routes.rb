@@ -8,7 +8,17 @@ Rails.application.routes.draw do
         post 'retweet'
       end
     end
+    resources :tweets do
+      resources :comments
+      resources :likes
+      member do
+        post :retweet
+        get 'retweet'
+      end
+    end
 
+    get '/tweets/retweet/:id', to: 'tweets#retweet', as: 'retweet'
+    
   resources :users do
     resources :friends
   end

@@ -1,7 +1,6 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: %i[ show edit update destroy retweet]
   skip_before_action :verify_authenticity_token
-  # GET /tweets or /tweets.json
 
 
   def follower 
@@ -17,7 +16,8 @@ class TweetsController < ApplicationController
     @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)
   end
 
-  
+
+
 
   def retweet
     redirect_to root_path, alert: 'no puedes hacer retweet' and return if @tweet.user == current_user
@@ -47,6 +47,7 @@ class TweetsController < ApplicationController
   def new
     @tweet = Tweet.new
     @tweet = current_user.tweets.build
+    retrweet = Tweet.new(retweet_id: @tweet.id, user: current_user)
   end
 
   # GET /tweets/1/edit
@@ -55,8 +56,12 @@ class TweetsController < ApplicationController
 
   # POST /tweets or /tweets.json
   def create
-    @tweet = Tweet.new(tweet_params.merge(user: current_user))
+    @tweet = Tweet.new(tweet_params)
     @tweet = current_user.tweets.build(tweet_params)
+
+    
+  
+
     respond_to do |format|
       if @tweet.save
         format.html { redirect_to root_path, notice: "Tweet was successfully created." }
@@ -100,4 +105,8 @@ class TweetsController < ApplicationController
     def tweet_params
       params.require(:tweet).permit(:content, :user_id, :retweet)
     end
+    def retweet_params
+      params.require(:retweet).permit(:retweet_id, :content).merge(user_id: current_user.id)
+    end
+
 end
