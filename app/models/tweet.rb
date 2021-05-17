@@ -19,7 +19,5 @@ class Tweet < ApplicationRecord
         Tweet.find(self.rt_ref)
     end
 
-    def get_name
-        self.name
-      end
+
 end

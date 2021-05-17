@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
 
   def get_name
-    self.name
+    self.user_name
   end
 
   def get_user_photo

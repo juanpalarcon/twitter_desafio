@@ -1,12 +1,12 @@
 <p  id="notice"><%= notice %></p>
 <p>
 <strong>Photo:</strong>
-<img src="<%= @tweet.user.user_photo %>"'width="60" height="60" class="rounded-circle mb-2">
+<img src="<%= @tweet.user.get_user_photo %>"'width="60" height="60" class="rounded-circle mb-2">
 </p>
 
 <p>
 <strong>Name:</strong>
-<%= @tweet.user.user_name %>
+<%= @tweet.user.get_name %>
 </p>
 
 <p>
@@ -20,6 +20,7 @@
     <%@tweet.likes.each do |like| %>
         <ul style="list-style-type:none" >
             <img src="<%= like.user.user_photo %>" class="img-thumbnail rounded-circle" style="max-width: 130px;">
+            <%= like.user.get_name %>
         </ul>        
     <% end %>
 </p>
