@@ -61,7 +61,7 @@
 <%# botones %>
             <div class="card-body" >
               <%= tweet.retweet %>
-                <% if !tweet.rt_ref.nil? %>
+                <% if !tweet.rt_ref.nil? %>      
                    <%= link_to "#{tweet.user.user_name} ha retweetiado... ", tweet.retweet_ref  %>
                 <% end %>
               

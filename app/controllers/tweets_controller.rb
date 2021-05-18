@@ -12,15 +12,18 @@ class TweetsController < ApplicationController
 
 
   def index
-
+    
     @tweet = Tweet.new
     @q = Tweet.ransack(params[:q])
-    @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)  #muestra todos los tweet
-    # if signed_in?
-    #   @tweets = User.tweets_for_me(current_user).page(params[:page]).per(50)
-    # else
-    #   @tweets = @q.result(distinct: true).order("created_at DESC").page(params[:page]).per(50)
-    # end
+    # @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)  #muestra todos los tweet
+    if signed_in?
+      @tweets = User.tweets_for_me(current_user).page(params[:page]).per(50)
+
+
+    else
+      @tweet = Tweet.all
+      @tweets = @q.result(distinct: true).order("created_at DESC").page(params[:page]).per(50)
+    end
   end
 
 
