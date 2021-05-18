@@ -54,7 +54,7 @@ class TweetsController < ApplicationController
   def new
     @tweet = Tweet.new
 
-    retrweet = Tweet.new(retweet_id: @tweet.id, user: current_user)
+    # retrweet = Tweet.new(retweet_id: @tweet.id, user: current_user)
     if user_signed_in?
 
       @tweet = current_user.tweets.build
@@ -100,7 +100,7 @@ class TweetsController < ApplicationController
   # DELETE /tweets/1 or /tweets/1.json
   def destroy
     @tweet.destroy
-    respond_to do |format|
+    respond_to do |format|  
       format.html { redirect_to tweets_url, notice: "Tweet was successfully destroyed." }
       format.json { head :no_content }
     end
