@@ -18,12 +18,19 @@
               <%= tweet.user.user_name %>
               
               <% if signed_in?  %>
-<%# implementacion de boton Follow, falta aun ...  %>
+<%# implementacion de boton Follow,   %>
       <% if  user_signed_in?%>
         <% if pre_follow(tweet.user)%>
           <%= link_to "Unfollow", unfollow_user_path(tweet.user_id), method: :delete %>
+          <span style="color: blue;">
+          <i class="fas fa-child fa-1x"></i>
+          </span>
         <% else %>
           <%= link_to "Follow", follow_user_path(tweet.user_id), method: :post %>
+
+            <span style="color: grey;">
+          <i class="fas fa-user-plus fa-1x"></i>
+          </span>
         <% end %>
       <% end %>
 
