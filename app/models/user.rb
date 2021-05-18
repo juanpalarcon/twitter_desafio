@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   has_many :added_friends, :class_name => 'Friend', :foreign_key => 'user_id'
   has_many :followers, :class_name => 'Friend', :foreign_key => 'friend_id'
-
+  scope :tweets_for_me, ->(user) { Tweet.where(user_id: user.friends.pluck(:friend_id).uniq) }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

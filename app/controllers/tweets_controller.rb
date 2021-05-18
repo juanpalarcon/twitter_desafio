@@ -4,12 +4,15 @@ class TweetsController < ApplicationController
 
 
   def follower 
-    @tweet = Tweet.find(params[:tweet_id])
     @friend = Friend.create(user_id: current_user.id, friend_id: params[:user_id])
+    @tweet = Tweet.find(params[:tweet_id])
     Friend.create(user_id: current_user.id, friend_id: @tweet.user_id)
-    redirect_to root_path, notice: "Ahora sigues a #{@tweet.user.user_name}"
+    redirect_to root_path, notice: "Ahora sigues a #{@tweet.user.get_name}"
   end
+
+
   def index
+    @tweets = Tweet.all
 
     @tweet = Tweet.new
     @q = Tweet.ransack(params[:q])
@@ -46,8 +49,14 @@ class TweetsController < ApplicationController
   # GET /tweets/new
   def new
     @tweet = Tweet.new
-    @tweet = current_user.tweets.build
     retrweet = Tweet.new(retweet_id: @tweet.id, user: current_user)
+    if user_signed_in?
+
+      @tweet = current_user.tweets.build
+      else
+      redirect_to new_user_session_path
+      end
+  
   end
 
   # GET /tweets/1/edit
@@ -57,10 +66,7 @@ class TweetsController < ApplicationController
   # POST /tweets or /tweets.json
   def create
     @tweet = Tweet.new(tweet_params)
-    @tweet = current_user.tweets.build(tweet_params)
-
-    
-  
+    # @tweet = current_user.tweets.build(tweet_params)
 
     respond_to do |format|
       if @tweet.save

@@ -16,9 +16,16 @@
             <div class="card-header border border-primary">
               <img src=<%= tweet.user.get_user_photo %> width="60" height="60" class="rounded-circle mb-2" >
               <%= tweet.user.user_name %>
+              
               <% if signed_in?  %>
 <%# implementacion de boton Follow, falta aun ...  %>
-          <%= link_to(user_friends_path(tweet.id), method: :post)do%><i class="fas fa-user-plus fa-1x"></i><% end %>
+      <% if  user_signed_in?%>
+        <% if pre_follow(tweet.user)%>
+          <%= link_to "Unfollow", unfollow_user_path(tweet.user_id), method: :delete %>
+        <% else %>
+          <%= link_to "Follow", follow_user_path(tweet.user_id), method: :post %>
+        <% end %>
+      <% end %>
 
 
 
@@ -46,7 +53,6 @@
             
 <%# botones %>
             <div class="card-body" >
-
               <%= tweet.retweet %>
                 <% if !tweet.rt_ref.nil? %>
                    <%= link_to "#{tweet.user.user_name} ha retweetiado... ", tweet.retweet_ref  %>
