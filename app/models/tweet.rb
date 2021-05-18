@@ -19,21 +19,8 @@ class Tweet < ApplicationRecord
     def retweet_ref
         Tweet.find(self.rt_ref)
     end
-    # def content
-    #     if source_tweet
-    #       source_tweet.content
-    #     else
-    #       super
-    #     end
-    #   end
-      
-    #   def content=(content)
-    #     if source_tweet
-    #       raise 'retweets cannot have content'
-    #     else
-    #       super
-    #     end
-    #   end
+
+
 
 
 end
