@@ -15,7 +15,10 @@
             <li><%= button_to 'Registrarse', new_user_registration_path, method: :get, :class => 'btn btn-primary mx-4' %></li>
         <% end %>
     </ul>
-        <form class="form-inline">
+    <% if signed_in?    %>
+    <%=render 'shared/buscador'%>
+    <% else %>
+            <form class="form-inline">
         <div class="d-inline-block">
             <input class="form-control" type="search" placeholder="Search" aria-label="Buscar" name="tweetsearch">
         </div>
@@ -23,6 +26,7 @@
         <button class="btn btn-outline-light" type="submit">Search</button>
         </div>
     </form>
+    <% end %>
 </nav>
 <% if user_signed_in?  %>
         <div class="container">
