@@ -12,11 +12,15 @@ class TweetsController < ApplicationController
 
 
   def index
-    @tweets = Tweet.all
 
     @tweet = Tweet.new
     @q = Tweet.ransack(params[:q])
-    @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)
+    @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)  #muestra todos los tweet
+    # if signed_in?
+    #   @tweets = User.tweets_for_me(current_user).page(params[:page]).per(50)
+    # else
+    #   @tweets = @q.result(distinct: true).order("created_at DESC").page(params[:page]).per(50)
+    # end
   end
 
 
@@ -49,6 +53,7 @@ class TweetsController < ApplicationController
   # GET /tweets/new
   def new
     @tweet = Tweet.new
+
     retrweet = Tweet.new(retweet_id: @tweet.id, user: current_user)
     if user_signed_in?
 
@@ -66,7 +71,7 @@ class TweetsController < ApplicationController
   # POST /tweets or /tweets.json
   def create
     @tweet = Tweet.new(tweet_params)
-    # @tweet = current_user.tweets.build(tweet_params)
+    @tweet = current_user.tweets.build(tweet_params)
 
     respond_to do |format|
       if @tweet.save
