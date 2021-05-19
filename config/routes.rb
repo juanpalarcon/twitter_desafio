@@ -24,9 +24,10 @@ Rails.application.routes.draw do
   resources :users do
     resources :friends
   end
-  namespace :api do
-    resources :tweets
-  end
+    namespace :api, defaults: {format: 'json'} do
+      resources :tweets, only: [:index, :create, :destroy, :update, :show]
+    end
+    
 
   root "tweets#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

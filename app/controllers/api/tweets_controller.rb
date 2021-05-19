@@ -1,5 +1,6 @@
 class Api::TweetsController < ApplicationController
     before_action :set_tweet, only: [:show, :update, :destroy]
+    http_basic_authenticate_with name: "juanpablo", password: "juanpablo"
 
     def index
       @tweets = Tweet.all
@@ -38,7 +39,7 @@ class Api::TweetsController < ApplicationController
       end
   
       def user_tweet
-        params.require(:tweet).permit(:email, :password, :user_name, :tweet, :retweet )
+        params.require(:tweet).permit(:email, :password, :user_name, :tweet, :likes )
       end
 
 end
