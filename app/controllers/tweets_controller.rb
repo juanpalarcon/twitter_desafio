@@ -19,7 +19,6 @@ class TweetsController < ApplicationController
     if signed_in?
       @tweets = User.tweets_for_me(current_user).page(params[:page]).per(50)
 
-
     else
       @tweet = Tweet.all
       @tweets = @q.result(distinct: true).order("created_at DESC").page(params[:page]).per(50)
