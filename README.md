@@ -1,5 +1,9 @@
 # README
 
+api key:juanpablo password:juanpablo
+"/api/:fecha1/:fecha2"
+ejemplo http://localhost:3000/api/2021-05-10/2021-05-15
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
