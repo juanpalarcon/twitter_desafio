@@ -1,12 +1,21 @@
 class Api::TweetsController < ApplicationController
     before_action :set_tweet, only: [:show, :update, :destroy]
     http_basic_authenticate_with name: "juanpablo", password: "juanpablo"
+    # http_basic_authenticate_with :current_user
+
 
     def index
       @tweets = Tweet.all
       render json: @tweets
     end
-  
+
+    def dates
+        fecha_1 = params[:fecha1]
+        fecha_2 = params[:fecha2]
+        @tweets = Tweet.where(:created_at => fecha_1..fecha_2)
+        render json: @tweets
+    end
+
     def show
     end
   

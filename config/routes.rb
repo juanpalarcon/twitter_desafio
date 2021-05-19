@@ -27,7 +27,8 @@ Rails.application.routes.draw do
     namespace :api, defaults: {format: 'json'} do
       resources :tweets, only: [:index, :create, :destroy, :update, :show]
     end
-    
+
+    get "/api/:fecha1/:fecha2", to: 'api/tweets#dates'
 
   root "tweets#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
