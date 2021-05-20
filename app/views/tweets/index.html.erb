@@ -44,17 +44,9 @@
 
           <div class='card-body'>
             <%#  el codigo es para que los hash se puedan buscar, no esta terminado  %>
-              <%# <%= tweet.content  %>
+              <%=  sanitize tweet.hashtag %>
             <div>  
-              <% content_tweet_array = tweet.content.split%>
-              <% content_tweet_array.each do |element|%>
-                <% if element.start_with?("#") %>
-                  <% element.slice!(0) %>
-                  <a href="?hashtag=<%= element %>">#<%= element %></a>
-                <% else %>
-                  <%= element %>
-                <% end %>
-              <% end %>  
+
             </div>
           </div>  
             
