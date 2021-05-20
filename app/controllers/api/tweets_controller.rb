@@ -5,8 +5,13 @@ class Api::TweetsController < ApplicationController
 
 
     def index
-      @tweets = Tweet.all
-      render json: @tweets
+        if request.headers['X-API-KEY'].present? && User.find_by(api_key: request.headers['X-API-KEY'])
+            @tweets = Tweet.all.order("created_at DESC").limit(50)
+
+            render json: @tweets
+        else
+            return render json: {mensaje:"falta colocar key = X-API-KEY o registrar al usuario"}
+        end
     end
 
     def dates
@@ -17,16 +22,30 @@ class Api::TweetsController < ApplicationController
     end
 
     def show
+        user = request.headers['X-CLIENTE']
+        Request.create(user: user)
+    
+        if @unit
+          render json: @unit
+        else
+          render json: {message: 'UF no ha sido encontrada'}
+        end
     end
   
     def create
-      @tweet = Tweet.new(user_params)
-  
-      if @tweet.save
-        render json: @tweet, status: :created
-      else
-        render json: @tweet.errors, status: :unprocessable_entity
-      end
+        if request.headers['X-API-KEY'].present? && User.find_by(api_key: request.headers['X-API-KEY'])
+
+            @tweet = Tweet.new(tweet_params)
+
+            if @tweet.save
+                render json: @tweet, status: :created, location: @tweet
+            else
+                render json: @tweet.errors, status: :unprocessable_entity
+            end
+
+        else 
+            return render json: {mensaje:"falta colocar key = X-API-KEY o registrar al usuario"}
+        end
     end
   
     def update
@@ -48,7 +67,7 @@ class Api::TweetsController < ApplicationController
       end
   
       def user_tweet
-        params.require(:tweet).permit(:email, :password, :user_name, :tweet, :likes )
+        params.require(:tweet).permit(:email, :password, :user_name, :tweet, :user_id, :tweet_id, :content )
       end
 
 end
