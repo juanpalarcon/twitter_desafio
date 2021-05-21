@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   get '/api/news', to: 'api/apis#index'
   get "/api/:fecha1/:fecha2", to: 'api/apis#dates'
   post '/api/create', to: 'api/apis#create'
+  get 'friends', to: 'friends#index'
 
 
   root "tweets#index"
