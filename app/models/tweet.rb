@@ -7,6 +7,7 @@ class Tweet < ApplicationRecord
     has_many :retweets, class_name: "Tweet", foreign_key: "tweet_id"
     belongs_to :parent_tweet, class_name: "Tweet", optional: true
     validates :content, presence: true
+    after_commit :create_hash_tags, on: :create
 
 
 
@@ -24,10 +25,15 @@ class Tweet < ApplicationRecord
         Tweet.find(self.rt_ref)
     end
 
-
-
-
-
+    def create_hash_tags
+        extract_name_hash_tags.each do |name|
+          hash_tags.create(name: name)
+        end
+    end
+      
+    def extract_name_hash_tags
+        content.to_s.scan(/#\w+/).map{|name| name.gsub("#", "")}
+    end
 
 
 end
