@@ -1,0 +1,2 @@
+class TweetHashTag < ApplicationRecord
+end

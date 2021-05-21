@@ -25,14 +25,7 @@ class Api::TweetsController < ApplicationController
     end
 
     def show
-        # user = request.headers['X-CLIENTE']
-        # Request.create(user: user)
-    
-        # if @unit
-        #   render json: @unit
-        # else
-        #   render json: {message: 'UF no ha sido encontrada'}
-        # end
+
     end
   
     def create
