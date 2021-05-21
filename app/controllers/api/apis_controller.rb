@@ -1,4 +1,4 @@
-class Api::TweetsController < ApplicationController
+class Api::ApisController < ApplicationController
     before_action :set_tweet, only: [:show, :update, :destroy]
     skip_before_action :verify_authenticity_token 
     http_basic_authenticate_with name: "juanpablo", password: "juanpablo"

@@ -16,7 +16,7 @@
         <% end %>
     </ul>
     <% if signed_in?    %>
-    <%=render 'shared/buscador'%>
+    <%# <%=render 'shared/buscador'%> %>
     <% else %>
             <form class="form-inline">
         <div class="d-inline-block">
@@ -28,6 +28,11 @@
     </form>
     <% end %>
 </nav>
+<div class="d-flex align-items-end">
+        <%= form_with url: search_path, method: :get, local: true, class: 'form-inline search-form' do |form| %>
+          <%= form.text_field :query, value: params[:query], class: 'form-control me-2', placeholder: '#search' %>
+        <% end %>
+      </div>
 <% if user_signed_in?  %>
         <div class="container">
             <b><p style="color:black" >Bienvenido/a:<%= current_user.user_name %><img src="<%= current_user.user_photo %>" width="40" height="40" class="rounded-circle mb-2" ></p></b>

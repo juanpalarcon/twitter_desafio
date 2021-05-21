@@ -1,3 +1,13 @@
+ <form class="form-inline">
+
+  <%= search_form_for @q do |f| %>
+    <div class="">
+      <%= f.label :content_cont, 'Twitter'  %>
+      <%= f.search_field :content_cont %>
+      <%= f.submit "Search" %>
+    </div>
+  <% end %>
+    
 
 <% if signed_in? %>
   <%= render 'form', tweet: @tweet %>
@@ -44,7 +54,16 @@
 
           <div class='card-body'>
             <%#  el codigo es para que los hash se puedan buscar, no esta terminado  %>
-              <%=  sanitize tweet.hashtag %>
+            <div align="left", top: 50px;>
+        <b>Tweets: </b><% tweet.content.to_s.split(' ').each do |word| %>
+          <% if word.start_with?('#') %>
+            <%= link_to word, search_path(query: word) %>
+          <%else %>
+            <%= word %>
+          <%end %>
+        <% end %>
+      </div>
+
             <div>  
 
             </div>
