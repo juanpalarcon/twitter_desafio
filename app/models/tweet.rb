@@ -32,6 +32,7 @@ class Tweet < ApplicationRecord
                 new_array.push(word)
         end
             self.content = new_array.join(" ")   
+            
     end
 
 
