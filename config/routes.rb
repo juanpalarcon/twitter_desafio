@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     end
     get '/api/news', to: 'api/tweets#index'
     get "/api/:fecha1/:fecha2", to: 'api/tweets#dates'
-    post '/api/create', to: 'api#create'
+    post '/api/create', to: 'api/tweets#create'
 
 
   root "tweets#index"

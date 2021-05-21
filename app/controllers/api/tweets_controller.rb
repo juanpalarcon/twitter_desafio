@@ -1,13 +1,21 @@
 class Api::TweetsController < ApplicationController
     before_action :set_tweet, only: [:show, :update, :destroy]
+    skip_before_action :verify_authenticity_token 
     http_basic_authenticate_with name: "juanpablo", password: "juanpablo"
+
     # http_basic_authenticate_with :current_user
 
 
     def index
-      @tweets = Tweet.all.order("created_at DESC").limit(50)
-      render json: @tweets
+      array = []
+      Tweet.all.each do |tweet|
+          array << {:id => tweet.id, :content => tweet.content, :user_id => tweet.user_id, :likes_count => tweet.likes.count, :retwitted_from => tweet.user.get_name} 
+      end
+      @tweets = array
+      render json: @tweets.last(50)
     end
+
+
 
     def dates
         fecha_1 = params[:fecha1]
@@ -28,8 +36,8 @@ class Api::TweetsController < ApplicationController
     end
   
     def create
-      @tweet = Tweet.new(user_params)
-  
+      @tweet = Tweet.new(content: params[:content]) 
+     
       if @tweet.save
         render json: @tweet, status: :created
       else
@@ -38,6 +46,7 @@ class Api::TweetsController < ApplicationController
     end
   
     def update
+
       if @tweet.update(user_params)
         render json: @tweet, status: :ok
       else
