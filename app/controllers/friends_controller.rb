@@ -1,14 +1,16 @@
 class FriendsController < ApplicationController
     before_action :find_user
 
-    def create
-        @friend = Friend.create(user_id: current_user.id, friend_id: params[:user_id])
-        redirect_to root_path
+
+    def index
+        @q = Tweet.ransack(params[:q])
+        @tweet = Tweet.new
+        if signed_in?
+            @tweets = User.tweets_for_me(current_user).page(params[:page]).per(50)
+        else
+            redirect_to root_path, notice: "you must log in"
+        end
     end
-
-  
-
-    before_action :set_user
 
     def create
         @friend = Friend.create(user_id: current_user.id, friend_id: params[:user_id])
