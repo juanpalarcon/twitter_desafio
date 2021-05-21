@@ -1,17 +1,14 @@
- <form class="form-inline">
 
-
-    
-
+<form class="form-inline">
 <% if signed_in? %>
-  <%= render 'form', tweet: @tweet %>
     <div class='container text-primary mx-4 shadow-xs  rounded'>
     <%= button_to 'My Friends', friends_path, method: :get, :class => 'mx-4 shadow-lg p-3 mb-5 bg-body rounded' %>
     </div>
+
 <% end %>
 
  <div class="container card ">
-  <h1>Tweets<i class="fab fa-twitter"></i></h1>
+  <h1>Tweets<i class="fab fa-twitter "></i></h1>
   <table class="table">
 
   </div>
@@ -26,7 +23,7 @@
               
               <% if signed_in?  %>
 <%# implementacion de boton Follow,   %>
-      <% if  user_signed_in?%>
+        <% if  user_signed_in?%>
         <% if pre_follow(tweet.user)%>
           <%= link_to "Unfollow", unfollow_user_path(tweet.user_id), method: :delete %>
           <span style="color: blue;">
