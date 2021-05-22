@@ -52,7 +52,7 @@
           <div class='card-body'>
             <%#  el codigo es para que los hash se puedan buscar, no esta terminado  %>
             <div align="left", top: 50px;>
-        <b>Tweets: </b><% tweet.content.to_s.split(' ').each do |word| %>
+        <% tweet.content.to_s.split(' ').each do |word| %>
           <% if word.start_with?('#') %>
             <%= link_to word, search_path(query: word) %>
           <%else %>

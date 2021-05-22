@@ -12,9 +12,7 @@ class TweetsController < ApplicationController
 
 
   def index
-    @tweet = Tweet.new(tweet_params.merge(user: current_user))
-    @tweet.save
-    
+    @tweet = Tweet.new
     @q = Tweet.ransack(params[:q])
     @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)  #muestra todos los tweet
     # if signed_in?
@@ -57,7 +55,7 @@ class TweetsController < ApplicationController
   def new
     @tweet = Tweet.new
 
-    # retrweet = Tweet.new(retweet_id: @tweet.id, user: current_user)
+    retrweet = Tweet.new(retweet_id: @tweet.id, user: current_user)
     if user_signed_in?
 
       @tweet = current_user.tweets.build
@@ -117,10 +115,7 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:content, :user_id)
-    end
-    def retweet_params
-      params.require(:retweet).permit(:retweet_id, :content).merge(user_id: current_user.id)
+      params.require(:tweet).permit(:content)
     end
 
 end
