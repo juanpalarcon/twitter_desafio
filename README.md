@@ -1,5 +1,7 @@
 # README
 
+-con el boton my friends se puede ir a la lista de amigos que sigue y ver sus tweets
+
 - hacer post por consola, cuando hice migraciones hoy con el profe pierre no me volvio a tomar los tweets por el local solo por consola y postman, no lo pude solucionar
 
 - para crearlos se le tiene que pasar:
