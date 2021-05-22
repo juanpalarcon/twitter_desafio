@@ -1,5 +1,7 @@
 # README
 
+-hacer post por consola, cuando hice migraciones hoy con el profe pierre no me volvio a tomar los tweets por el local solo por consola y postman, no lo pude solucionar
+
 - activeadmin
 - http://localhost:3000/admin/
 

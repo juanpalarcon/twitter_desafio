@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: %i[show edit update destroy retweet]
-  skip_before_action :verify_authenticity_token
+
 
 
   def follower 
@@ -52,18 +52,18 @@ class TweetsController < ApplicationController
   end
   
   # GET /tweets/new
-  def new
-    @tweet = Tweet.new
+  # def new
+  #   @tweet = Tweet.new
 
-    retrweet = Tweet.new(retweet_id: @tweet.id, user: current_user)
-    if user_signed_in?
+  #   retrweet = Tweet.new(retweet_id: @tweet.id, user: current_user)
+  #   if user_signed_in?
 
-      @tweet = current_user.tweets.build
-      else
-      redirect_to new_user_session_path
-      end
+  #     @tweet = current_user.tweets.build
+  #     else
+  #     redirect_to new_user_session_path
+  #     end
   
-  end
+  # end
 
   # GET /tweets/1/edit
   def edit
