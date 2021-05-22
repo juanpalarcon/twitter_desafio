@@ -1,5 +1,10 @@
 # README
 
+-activeadmin
+-http://localhost:3000/admin/
+
+- email: test7@example.com pass: 123123
+
 para busar tweet por fechas
 
 - "/api/:fecha1/:fecha2"
