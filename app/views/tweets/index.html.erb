@@ -4,7 +4,7 @@
     
 
 <% if signed_in? %>
-  <%# <%= render 'form', tweet: @tweet %> 
+  <%= render 'form', tweet: @tweet %>
     <div class='container text-primary mx-4 shadow-xs  rounded'>
     <%= button_to 'My Friends', friends_path, method: :get, :class => 'mx-4 shadow-lg p-3 mb-5 bg-body rounded' %>
     </div>

@@ -15,6 +15,7 @@ class TweetsController < ApplicationController
     # @tweet = Tweet.new(tweet_params)
     # @tweet = current_user.tweets.build(tweet_params)
     # @tweet.save
+    @tweet = Tweet.new
     @q = Tweet.ransack(params[:q])
     @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)  #muestra todos los tweet
     # if signed_in?
