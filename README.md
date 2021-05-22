@@ -20,7 +20,7 @@ para busar tweet por fechas
 - "/api/:fecha1/:fecha2"
 - ejemplo http://localhost:3000/api/2021-05-10/2021-05-15
 
-para crear un tweets desde la api http://localhost:3000/api/create
+para crear un tweets desde la api. POST: http://localhost:3000/api/create
 
 - basic auth:juanpablo password:juanpablo
 - se tiene que pasar un content y un user_id para poder crearlo
