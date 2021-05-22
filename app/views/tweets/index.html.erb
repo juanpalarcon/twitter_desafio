@@ -90,19 +90,19 @@
               <% if signed_in? %>
 
                   <% if like(tweet, current_user) %>
-                      <%= link_to tweet_like_path(tweet, like(tweet, current_user)), method: :delete do %>
+                    <%= link_to tweet_like_path(tweet, like(tweet, current_user)), method: :delete do %> 
                     <span style="color: red;">
                       <i class="fas fa-heart fa-1x"></i>
-                      </span>
-                  <% end %>
-              <% else  %> 
-                <%= link_to tweet_likes_path(tweet), method: :post do %>
-                    <span style="color: black;">
-                    <i class="fas fa-heart fa-1x"></i>
                     </span>
-                <% end %>
-                <% end %>
-              <% end %>
+                    <% end %>
+                  <% else  %> 
+                    <%= link_to tweet_likes_path(tweet), method: :post do %>
+                    <span style="color: black;">
+                      <i class="fas fa-heart fa-1x"></i>
+                    </span>
+                  <% end %>
+                  <% end %>
+                  <% end %>
           <% end %>
         </tr>
     
