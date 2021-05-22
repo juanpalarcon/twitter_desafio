@@ -12,7 +12,9 @@ class TweetsController < ApplicationController
 
 
   def index
-    @tweet = Tweet.new
+    @tweet = Tweet.new(tweet_params.merge(user: current_user))
+    @tweet.save
+    
     @q = Tweet.ransack(params[:q])
     @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)  #muestra todos los tweet
     # if signed_in?
@@ -72,7 +74,7 @@ class TweetsController < ApplicationController
   # POST /tweets or /tweets.json
   def create
     @tweet = Tweet.new(tweet_params.merge(user: current_user))
-    @tweet = current_user.tweets.build(tweet_params)
+  
 
     respond_to do |format|
       if @tweet.save
