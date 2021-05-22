@@ -1,7 +1,9 @@
 # README
 
--activeadmin
--http://localhost:3000/admin/
+- activeadmin
+- http://localhost:3000/admin/
+
+- entrar a la pestaña User
 
 - email: test7@example.com pass: 123123
 
