@@ -14,10 +14,9 @@ class TweetsController < ApplicationController
   def index
 
     @tweet = Tweet.new
-
     @q = Tweet.ransack(params[:q])
     @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)  
-    # end
+
   end
 
 
@@ -48,18 +47,8 @@ class TweetsController < ApplicationController
   end
   
   # GET /tweets/new
-  # def new
-  #   @tweet = Tweet.new
-
-  #   retrweet = Tweet.new(retweet_id: @tweet.id, user: current_user)
-  #   if user_signed_in?
-
-  #     @tweet = current_user.tweets.build
-  #     else
-  #     redirect_to new_user_session_path
-  #     end
-  
-  # end
+  def new
+  end
 
   # GET /tweets/1/edit
   def edit
@@ -68,8 +57,6 @@ class TweetsController < ApplicationController
   # POST /tweets or /tweets.json
   def create
     @tweet = Tweet.new(tweet_params.merge(user: current_user))
-    @tweet = current_user.tweets.build(tweet_params)
-  
 
     respond_to do |format|
       if @tweet.save
